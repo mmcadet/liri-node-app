@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 // Grab keys from keys.js
-var keys = require('./keys.js');
+var keys = require("./key");
 
 // Twitter and Spotify API LOAD 
 var Twitter = require('twitter');
@@ -22,15 +22,12 @@ var command = process.argv[2];
 // PASS INFO on SPOTIFY or MOVIE API to ARRAY //
 var pass = process.argv[3];
 
-
-
-
 // Recent Tweets
 function twitGet(){
 	twitClient.get('statuses/user_timeline',function(error, tweets, response){
 		if(error) throw error;
 			for (var i = 0; i < tweets.length; i++){
-				console.log(tweets[i].created_at+": "+tweets[i].user.screen_name+" says: "+tweets[i].text);			
+				console.log(tweets[i].created_at + ": " + tweets[i].user.screen_name + " says: " + tweets[i].text);			
 		}
 	})
 };
@@ -39,13 +36,12 @@ function twitGet(){
 function spotGet(){
 	spotClient.search({type:'track', query: pass}, function(err, data){
 		if(err){
-            console.log('Error occurred: '+err);
-            console.log("'The Sign' by Ace of Base");
+            console.log('Error occurred: ' + err);
 			return;			
 		}
 		var results = data.tracks.items;
 
-		console.log ("Found: "+results.length+" results matching "+pass);
+		console.log ("Found: " + results.length+" results matching "+pass);
 
 		for(var i = 0; i < results.length; i++){
 			console.log(" ");
@@ -77,8 +73,7 @@ function moviGet(){
 	})
 }
 
-// SPOTIFYING TEXT 
-
+// Spotify text
 function spotIt(){
 	fs.readFile("random.txt", "utf8", function(error, data){
 
